@@ -4,47 +4,64 @@ $.getJSON('resources.json')
   .done(loadResources)
   .fail(errorMessage);
 
-function createTable(category, object) {
-$(category).append("<table></table>")
-  .append("<tr><td>" + object.Name + "</td></tr>")
-  .append("<tr><td>" + object.Website + "</td></tr>")
-  .append("<tr><td>" + object.MailingAddress + "</td></tr>")
-  .append("<tr><td>" + object.Phone + "</td>" + "<td>" + object.Email + "</tr>")
-  .append("<tr><td>" + object.Services + "</td></tr>")
+function createTable(category, tables) {
+    console.log(tables);
+    for (var i = 0, max = tables.length; i < max; i++) {
+        var info = "<tr><td>" + tables[i].Name + "</td></tr><tr><td>" + tables[i].Website + "</td></tr><tr><td>" + tables[i].MailingAddress + "</td></tr><tr><td>" + tables[i].Phone + "</td></tr><tr><td>" + tables[i].Email + "</td></tr><tr><td>" + tables[i].Services + "</td></tr>";
+        var this_table = $(category).append("<table class='table table-bordered table-hover'>" + info + "<tbody></tbody></table>");
+        }
 }
 
 function loadResources(data) {
-  for(var i = 0, max = data.length; i < max; i++) {
+    var ArtTables = [];
+    var HealthTables = [];
+    var HotlineTables = [];
+    var CounselorsTables = [];
+    var ChurchesTables = [];
+    var SportsTables = [];
+    var StudentTables = [];
+    var SupportTables = [];
+    for(var i = 0, max = data.length; i < max; i++) {
     var obj = data[i];
+    var obj2 = obj;
     if(obj.Category === "ArtMusicFilmShowings") {
-    createTable("#art", obj);
-    }
-    else if(obj.Category === "HealthcareAssistance") {
-    createTable("#health", obj);
-    }
-    else if(obj.Category === "Hotline") {
-    createTable("#hotlines", obj);
-    }
-    else if(obj.Category === "MentalHealthCounselor") {
-    createTable("#counselors", obj);
-    }
-    else if(obj.Category === "Church") {
-    createTable("#churches", obj);
-    }
-    else if(obj.Category === "SportsRecreation") {
-    createTable("#sports", obj);
-    }
-    else if(obj.Category === "StudentGroup") {
-    createTable("#student", obj);
-    }
-    else if(obj.Category === "SupportGroup") {
-    createTable("#support", obj);
-    }
+            ArtTables.push(obj2);
+        }
+        else if(obj.Category === "HealthcareAssistance") {
+            HealthTables.push(obj2);
+        }
+        else if(obj.Category === "Hotline") {
+            HotlineTables.push(obj2);
+        }
+        else if(obj.Category === "MentalHealthCounselor") {
+            CounselorsTables.push(obj2);
+        }
+        else if(obj.Category === "Church") {
+            ChurchesTables.push(obj2);
+        }
+        else if(obj.Category === "SportsRecreation") {
+            SportsTables.push(obj2);
+        }
+        else if(obj.Category === "StudentGroup") {
+            StudentTables.push(obj2);
+        }
+        else if(obj.Category === "SupportGroup") {
+            SupportTables.push(obj2);
+        }
   }
+  createTable("#art", ArtTables);
+  createTable("#health", HealthTables);
+  createTable("#hotlines", HotlineTables);
+  createTable("#counselors", CounselorsTables);
+  createTable("#churches", ChurchesTables);
+  createTable("#sports", SportsTables);
+  createTable("#student", StudentTables);
+  createTable("#support", SupportTables);
+
 };
 
 function errorMessage() {
-  $("#info").append("<p class='errorMsg'>There's been an error retrieving the resource guide. Please refresh and try again.</p>");
+  $("#info").append("<p class='text-danger'>There's been an error retrieving the resource guide. Please refresh and try again.</p>");
 };
 
 $(".toggle").hide();
