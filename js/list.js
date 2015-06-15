@@ -4,60 +4,45 @@ $.getJSON('resources.json')
   .done(loadResources)
   .fail(errorMessage);
 
-function createTable(category, tables) {
-    console.log(tables);
-    for (var i = 0, max = tables.length; i < max; i++) {
-        var info = "<tr><td>" + tables[i].Name + "</td></tr><tr><td>" + tables[i].Website + "</td></tr><tr><td>" + tables[i].MailingAddress + "</td></tr><tr><td>" + tables[i].Phone + "</td></tr><tr><td>" + tables[i].Email + "</td></tr><tr><td>" + tables[i].Services + "</td></tr>";
-        var this_table = $(category).append("<table class='table table-bordered table-hover'>" + info + "<tbody></tbody></table>");
-        }
-}
+function createTable(category, object) {
+  var name = (object.Name !== "") ?  "<tr><td><strong>" + object.Name + "</strong></td></tr>" : "";
+  var website = (object.website !== "") ? "<tr><td><a href='" + object.Website + "'>" + object.Website + "</a></td></tr>" : "";
+  var mailing = (object.MailingAddress !== "") ? "<tr><td>" + object.MailingAddress + "</td></tr>" : "";
+  var phone = (object.Phone !== "") ? "<tr><td>" + object.Phone + "</td></tr>" : "";
+  var email = (object.Email !== "") ? "<tr><td><a href='mailto:" + object.Email + "''>" + object.Email + "</a></td></tr>" : "";
+  var services = (object.Services !== "") ? "<tr><td>" + object.Services + "</td></tr>" : "";
+  var info = name + website + mailing + phone + email + services;
+  $(category).append("<table class='table table-bordered table-hover'>" + info + "<tbody></tbody></table>");
+  };
 
 function loadResources(data) {
-    var ArtTables = [];
-    var HealthTables = [];
-    var HotlineTables = [];
-    var CounselorsTables = [];
-    var ChurchesTables = [];
-    var SportsTables = [];
-    var StudentTables = [];
-    var SupportTables = [];
-    for(var i = 0, max = data.length; i < max; i++) {
+  for(var i = 0, max = data.length; i < max; i++) {
     var obj = data[i];
-    var obj2 = obj;
     if(obj.Category === "ArtMusicFilmShowings") {
-            ArtTables.push(obj2);
-        }
-        else if(obj.Category === "HealthcareAssistance") {
-            HealthTables.push(obj2);
-        }
-        else if(obj.Category === "Hotline") {
-            HotlineTables.push(obj2);
-        }
-        else if(obj.Category === "MentalHealthCounselor") {
-            CounselorsTables.push(obj2);
-        }
-        else if(obj.Category === "Church") {
-            ChurchesTables.push(obj2);
-        }
-        else if(obj.Category === "SportsRecreation") {
-            SportsTables.push(obj2);
-        }
-        else if(obj.Category === "StudentGroup") {
-            StudentTables.push(obj2);
-        }
-        else if(obj.Category === "SupportGroup") {
-            SupportTables.push(obj2);
-        }
+      createTable("#art", obj);
+    }
+    else if(obj.Category === "HealthcareAssistance") {
+      createTable("#health", obj);
+    }
+    else if(obj.Category === "Hotline") {
+      createTable("#hotlines", obj);
+    }
+    else if(obj.Category === "MentalHealthCounselor") {
+      createTable("#counselors", obj);
+    }
+    else if(obj.Category === "Church") {
+      createTable("#churches", obj);
+    }
+    else if(obj.Category === "SportsRecreation") {
+      createTable("#sports", obj);
+    }
+    else if(obj.Category === "StudentGroup") {
+      createTable("#student", obj);
+    }
+    else if(obj.Category === "SupportGroup") {
+      createTable("#support", obj);
+    }
   }
-  createTable("#art", ArtTables);
-  createTable("#health", HealthTables);
-  createTable("#hotlines", HotlineTables);
-  createTable("#counselors", CounselorsTables);
-  createTable("#churches", ChurchesTables);
-  createTable("#sports", SportsTables);
-  createTable("#student", StudentTables);
-  createTable("#support", SupportTables);
-
 };
 
 function errorMessage() {
