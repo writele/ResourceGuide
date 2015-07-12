@@ -3,9 +3,45 @@ h2 {
 }
 
 body {
-  font-size: 1.5em;
+  font-size: 1.7em;
 }
 
 ul {
   list-style: none;
 }
+
+div {
+  width: 100%;
+}
+
+.top-padding {
+  padding-top: 25px;
+}
+
+.text-vertical-center {
+  display: block;
+  color:#fff;
+  padding: 45px;
+}
+
+.text-vertical-center a {
+  color: #452371;
+}
+
+.text-vertical-center a:hover {
+  color: #C4B6D5;
+  text-decoration: none;
+}
+
+.bg {
+  background-color: #704AA1;
+}
+
+.em {
+  font-style: italic;
+  padding: 10px 0;
+}
+/*.tagline {
+  color:;
+  background-color: rgba(255, 255, 255, 0.6);
+}*/

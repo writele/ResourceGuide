@@ -49,10 +49,10 @@ function errorMessage() {
   $("#info").append("<p class='text-danger'>There's been an error retrieving the resource guide. Please refresh and try again.</p>");
 };
 
-$(".toggle").hide();
+$(".togglecat").hide();
 
 $("h2").on("click", function() {
-  $(this).parent("div").find(".toggle").toggle();
+  $(this).parent("div").find(".togglecat").toggle();
 });
 
 })();
